@@ -1,0 +1,4 @@
+Lógica do Programa:
+São enviados os dados pelo utilizdor sobre o número de perguntas, se são abertas ou fechadas e, se forem fechadas, as 4 respostas possíveis e as suas cotações, ou no caso de forem abertas, apenas é dada a cotação. As respostas ás perguntas são armazenadas no ficheiro "data.txt" para depois serem comparadas ás respostas dos alunos, sendo possível assim calcular a sua cotação.
+Após o utilizador fornecer os dados acerca do teste, fornece os dados acerca das respostas dos alunos.
+Tem de fornecer o número de alunos, os seus respectivos nomes e as suas respostas ás perguntas, essas respostas são comparadas, pergunta a pergunta, com as respostas corretas do teste, a cotação para a escolha da resposta é aplicada e soma-se a pontuação á nota do aluno, é repetido este processo para o número de alunos que haja a fazer a prova. No final realiza-se a soma das pontuações e imprime-se no ecrã o nome do aluno e a sua nota final.
