@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class Client {
     public static void main(String[] args) throws IOException {
 
+        // TODO Parte I - Criação das perguntas.
         Scanner scanner = new Scanner(System.in);
         int nrQuest = scanner.nextInt();
         scanner.nextLine();
@@ -61,7 +62,7 @@ public class Client {
             e.printStackTrace();
         }
 
-        // Leitura dos dados dos Alunos
+        // TODO Parte II - Leitura dos dados dos Alunos.
         int nrStudents = scanner.nextInt();
         scanner.nextLine();
         Map<String, Double> studentScores = new HashMap<>();
@@ -117,10 +118,18 @@ public class Client {
             reader.close();
         }
 
-        // Imprime a nota de todos os alunos.
+        // Imprime a nota de todos os alunos. 
+        System.out.print("\033\143"); // Limpa a consola
         for (Map.Entry<String, Double> entry : studentScores.entrySet()) {
             System.out.println("Nota de " + entry.getKey() + ": " + entry.getValue());
         }
         scanner.close();
+
+        // TODO Parte III
+
+        // Número de cada tipo de questão.
+        int nrQuestTF = scanner.nextInt();
+        int nrQuestMC = 5;
+
     }
 }
