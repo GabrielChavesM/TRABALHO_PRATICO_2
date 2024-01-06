@@ -123,13 +123,46 @@ public class Client {
         for (Map.Entry<String, Double> entry : studentScores.entrySet()) {
             System.out.println("Nota de " + entry.getKey() + ": " + entry.getValue());
         }
-        scanner.close();
 
-        // TODO Parte III
+        
+    // TODO Parte III - Armazenar respostas das perguntas no arquivo "data.txt"
+    BufferedWriter writer2 = new BufferedWriter(new FileWriter("data.txt", true)); // Usar o append true para acrescentar ao arquivo existente
 
-        // Número de cada tipo de questão.
-        int nrQuestTF = scanner.nextInt();
-        int nrQuestMC = 5;
+    /*
+     * Ao contrário das perguntas acima, o formato de input das perguntas V/F é linha
+     * a linha, por exemplo:
+     * 1
+     * "2+2 é 4?"
+     * A
+     * V
+     * 2
+     * B
+     * F
+     * -1
+     */
+    int nrQuest3 = scanner.nextInt();
+    scanner.nextLine();
 
-    }
+        for (int i = 0; i < nrQuest3; i++) {
+            int QuestNr = scanner.nextInt();
+            writer2.write(QuestNr + "\n");
+            scanner.nextLine(); // Limpar o buffer
+
+            String question = scanner.nextLine().trim();
+            writer2.write(question + "\n");
+            
+            int numOptions = 2;
+
+            for (int j = 0; j < numOptions; j++) {
+                String option = scanner.nextLine();
+                writer2.write(option + "\n");
+                String trueFalse = scanner.nextLine();
+                writer2.write(trueFalse + "\n");
+                Double score = Double.parseDouble(scanner.nextLine());
+                writer2.write(score + "\n");
+            }
+        }
+    writer2.close(); // Fechar o arquivo
+    }   
 }
+
