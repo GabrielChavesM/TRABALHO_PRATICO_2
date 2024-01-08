@@ -21,7 +21,7 @@ public class Client {
         Map<Integer, Double[]> pontuacaoQuestoes = new HashMap<>();
 
         // Criação de um arquivo para armazenar as respostas das perguntas.
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data.txt"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/data_1.txt"))) {
             for (int i = 0; i < nrQuest; i++) {
                 String userInput = scanner.nextLine(); 
                 Scanner stringScanner = new Scanner(userInput);
@@ -35,44 +35,44 @@ public class Client {
                 if (QuestType.equals("F")) {
                     int nrOpcoes = 4;
                     String[] respostas = new String[nrOpcoes];
-                    Double[] pontuacaoQuestao = new Double[nrOpcoes];
+                    Double[] QuestScore = new Double[nrOpcoes];
 
                     for (int j = 0; j < nrOpcoes; j++) {
                         String optionInput = scanner.nextLine();
                         String[] parts = optionInput.split("\\s+");
 
                         respostas[j] = parts[0];
-                        pontuacaoQuestao[j] = Double.parseDouble(parts[2]);
+                        QuestScore[j] = Double.parseDouble(parts[2]);
 
                         // Armazena as letras e pontuações das respostas
                         writer.write(respostas[j] + "\n");
-                        writer.write(pontuacaoQuestao[j] + "\n");
+                        writer.write(QuestScore[j] + "\n");
                     }
                     // Passa para os hashmaps os seguintes valores
                     respostasCorretas.put(QuestNr, respostas);
-                    pontuacaoQuestoes.put(QuestNr, pontuacaoQuestao);
+                    pontuacaoQuestoes.put(QuestNr, QuestScore);
                 }
 
                 if (QuestType.equals("A")) {
-                    int pontuacaoQuestaoA = scanner.nextInt();
-                    writer.write(Integer.toString(pontuacaoQuestaoA) + "\n");
+                    int QuestScoreA = scanner.nextInt();
+                    writer.write(Integer.toString(QuestScoreA) + "\n");
                 }
             }
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
 
-        // TODO Parte II - Leitura dos dados dos Alunos.
+    // TODO Parte II - Leitura dos dados dos Alunos.
         int nrStudents = scanner.nextInt();
         scanner.nextLine();
         Map<String, Double> studentScores = new HashMap<>();
 
         for (int i = 0; i < nrStudents; i++) {
             String studentName = scanner.next();
-            double pontuacaoAluno = 0.0;
+            double studentScore = 0.0;
             // * Para avaliar os alunos, é lido o arquivo para comparar as respostas
             // * e aplicar a cotação correta.
-            BufferedReader reader = new BufferedReader(new FileReader("data.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("data/data_1.txt"));
 
             // São 4 alíneas para cada pergunta
             for (int j = 0; j < 4; j++) {
@@ -94,7 +94,7 @@ public class Client {
 
                         // Se o valor for null, "-", a pontuação não se altera
                         if (currentLine == null) {
-                            pontuacaoAluno += 0;
+                            studentScore += 0;
                             break;
                         }
 
@@ -102,8 +102,8 @@ public class Client {
                         // * teste e lê a linha imediatamente a seguir aonde está
                         // * a sua cotação e a soma á nota final do aluno.
                         if (currentLine.trim().equals(studentQuestLetter)) {
-                            double pontuacaoQuestao = Double.parseDouble(reader.readLine());
-                            pontuacaoAluno += pontuacaoQuestao;
+                            double QuestScore = Double.parseDouble(reader.readLine());
+                            studentScore += QuestScore;
                             break;
                         }
                     }
@@ -111,82 +111,101 @@ public class Client {
                 
                 // 1 resposta aberta
                 else if (studentQuestNr == 4 && (studentQuestLetter.equals("1") || studentQuestLetter.equals("2"))) {
-                    pontuacaoAluno += 2.0;
+                    studentScore += 2.0;
                 }
             }
-            studentScores.put(studentName, pontuacaoAluno);
+            studentScores.put(studentName, studentScore);
             reader.close();
         }
-
-        // Imprime a nota de todos os alunos. 
-        System.out.print("\033\143"); // Limpa a consola
-        for (Map.Entry<String, Double> entry : studentScores.entrySet()) {
-            System.out.println("Nota de " + entry.getKey() + ": " + entry.getValue());
-        }
-
         
 
-// TODO Parte III - Armazenar respostas das perguntas de V/F no arquivo "data.txt"
-try {
-    BufferedWriter writer2 = new BufferedWriter(new FileWriter("data_2.txt")); // Append true para acrescentar ao arquivo existente
+    // TODO Parte III - Armazenar respostas das perguntas de V/F no arquivo "data.txt"
+    try {
+        BufferedWriter writerTrueOrFalse = new BufferedWriter(new FileWriter("data/data_2.txt")); // Append true para acrescentar ao arquivo existente
 
-    int nrQuest3 = scanner.nextInt();
-    scanner.nextLine();
+        int nrQuestTrueOrFalse = scanner.nextInt();
+        scanner.nextLine();
 
-    for (int i = 0; i < nrQuest3; i++) {
-        int QuestNr = scanner.nextInt();
-        writer2.write(QuestNr + "\n");
-        scanner.nextLine(); // Limpar o buffer
+        for (int i = 0; i < nrQuestTrueOrFalse; i++) {
+            int QuestNr = scanner.nextInt();
+            writerTrueOrFalse.write("P" + QuestNr + "\n");
+            scanner.nextLine(); // Limpar o buffer
 
-        String question = scanner.nextLine().trim();
+            String question = scanner.nextLine().trim();
 
-        int numOptions = 2;
+            int numOptions = 2;
 
-        for (int j = 0; j < numOptions; j++) {
-            String option = scanner.nextLine();
-            writer2.write(option + "\n");
-            String trueFalse = scanner.nextLine();
-            writer2.write(trueFalse + "\n");
-            Double score = Double.parseDouble(scanner.nextLine());
-            writer2.write(score + "\n");
+            for (int j = 0; j < numOptions; j++) {
+                //String option = scanner.nextLine();
+                //writerTrueOrFalse.write(option + "\n");
+                String trueFalse = scanner.nextLine();
+                writerTrueOrFalse.write(trueFalse + "\n");
+                Double score = Double.parseDouble(scanner.nextLine());
+                writerTrueOrFalse.write(score + "\n");
+            }
         }
-    }
-    writer2.close(); // Fechar o arquivo
+        writerTrueOrFalse.close(); // Fechar o arquivo
+        
 
-} catch (NumberFormatException e) {
-    e.printStackTrace();
-}
+        System.out.println("Digite o número de alunos: ");
+        int nrStudentsTrueOrFalse = scanner.nextInt();
+        scanner.nextLine(); // Consumir a quebra de linha pendente
 
-// TODO Parte IV - Armazenar respostas das perguntas de múltipla escolha (5 opções) no arquivo "data.txt"
-try {
-    BufferedWriter writer3 = new BufferedWriter(new FileWriter("data_3.txt")); // Append true para acrescentar ao arquivo existente
+        Map<String, Double> studentsScoresTrueOrFalse = new HashMap<>();
 
-    int nrQuest4 = scanner.nextInt();
-    scanner.nextLine();
+        for (int i = 0; i < nrStudentsTrueOrFalse; i++) {
+            System.out.println("Digite o nome do aluno: ");
+            String studentName = scanner.next();
+            double studentScore = 0.0;
 
-    for (int i = 0; i < nrQuest4; i++) {
-        int QuestNr = scanner.nextInt();
-        writer3.write(QuestNr + "\n");
-        scanner.nextLine(); // Limpar o buffer
+            int nrQuestions = nrQuestTrueOrFalse;
 
-        String question = scanner.nextLine().trim();
+            for (int j = 0; j < nrQuestions; j++) {
+                System.out.println("Digite o número da questão, a letra e a resposta (ex: P1 V/F): ");
+                String studentQuestNr = scanner.next();
+                String studentAnswer = scanner.next();
 
-        int numOptions = 5;
+                try {
+                    BufferedReader reader = new BufferedReader(new FileReader("data/data_2.txt"));
+                    String line;
 
-        for (int j = 0; j < numOptions; j++) {
-            String option = scanner.nextLine();
-            writer3.write(option + "\n");
-            String trueFalse = scanner.nextLine();
-            writer3.write(trueFalse + "\n");
-            Double score = Double.parseDouble(scanner.nextLine());
-            writer3.write(score + "\n");
+                    while ((line = reader.readLine()) != null) {
+                        if (line.trim().equals(studentQuestNr)) {
+                            int startLine = (Integer.parseInt(studentQuestNr.substring(1)) - 1) * 8 + 2;
+                            int endLine = (Integer.parseInt(studentQuestNr.substring(1)) - 1) * 8 + 9;
+
+                            for (int n = startLine; n <= endLine; n++) {
+                                String currentLine = reader.readLine();
+
+                                if (currentLine == null) {
+                                    studentScore += 0;
+                                    break;
+                                }
+
+                                if (currentLine.trim().equals(studentAnswer)) {
+                                    double questScore = Double.parseDouble(reader.readLine().trim());
+                                    studentScore += questScore;
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+                    }
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            studentsScoresTrueOrFalse.put(studentName, studentScore);
         }
-    }
-    writer3.close(); // Fechar o arquivo
-} catch (NumberFormatException e) {
-    e.printStackTrace();
-}
-    scanner.close();
-    }   
-}
 
+        // Exibir notas dos alunos para as questões V/F
+        System.out.println("Notas dos alunos:");
+        for (Map.Entry<String, Double> entry : studentsScoresTrueOrFalse.entrySet()) {
+            System.out.println(entry.getKey() + " - Nota: " + entry.getValue());
+        }
+    } catch(NumberFormatException e) {
+        e.printStackTrace();
+    }
+    }
+}

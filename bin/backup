@@ -124,3 +124,81 @@ public class Client {
         scanner.close();
     }
 }
+
+    /*
+        // TODO - Parte IV - Avaliação alunos
+        int nrAlunos = scanner.nextInt();
+        scanner.nextLine(); // Consumir a quebra de linha após o número de alunos
+        Map<String, Double> studentScores2 = new HashMap<>();
+
+        for (int i = 0; i < nrAlunos; i++) {
+            String name = scanner.nextLine();
+            double score = 0.0;
+
+            try (BufferedReader reader = new BufferedReader(new FileReader("data_2.txt"))) {
+                for (int j = 0; j < 2; j++) {
+                    int studentQuestNr = Integer.parseInt(scanner.nextLine());
+                    String studentQuestOption = scanner.nextLine();
+                    String trueFalse = scanner.nextLine();
+                    Double questScore = Double.parseDouble(scanner.nextLine());
+
+                    int startLine = (studentQuestNr - 1) * 6 - 4;
+                    int endLine = (studentQuestNr - 1) * 6 + 1;
+                    
+                    for (int n = startLine; n <= endLine; n++) {
+                        String currentLine = reader.readLine();
+                        if (currentLine != null && currentLine.trim().equals(studentQuestOption)) {
+                            double pontuacaoQuestao = Double.parseDouble(reader.readLine());
+                            score += pontuacaoQuestao;
+                            break;
+                        }
+                    }
+                }
+            } catch (IOException | NumberFormatException e) {
+                e.printStackTrace();
+            }
+
+            studentScores2.put(name, score);
+        }
+
+
+
+// Mostra a nota de todos os alunos
+for (Map.Entry<String, Double> entry : studentScores2.entrySet()) {
+    System.out.println("Nota de " + entry.getKey() + ": " + entry.getValue());
+}
+
+// Aqui você tem o Map 'studentScores2' que contém as notas calculadas dos alunos.
+// Utilize conforme necessário.
+        
+    /*
+    // TODO Parte V - Armazenar respostas das perguntas de múltipla escolha (5 opções) no arquivo "data.txt"
+    try {
+        BufferedWriter writer3 = new BufferedWriter(new FileWriter("data_3.txt")); // Append true para acrescentar ao arquivo existente
+
+        int nrQuest4 = scanner.nextInt();
+        scanner.nextLine();
+
+        for (int i = 0; i < nrQuest4; i++) {
+            int QuestNr = scanner.nextInt();
+            writer3.write(QuestNr + "\n");
+            scanner.nextLine(); // Limpar o buffer
+
+            String question = scanner.nextLine().trim();
+
+            int numOptions = 5;
+
+            for (int j = 0; j < numOptions; j++) {
+                String option = scanner.nextLine();
+                writer3.write(option + "\n");
+                String trueFalse = scanner.nextLine();
+                writer3.write(trueFalse + "\n");
+                Double score = Double.parseDouble(scanner.nextLine());
+                writer3.write(score + "\n");
+            }
+        }
+        writer3.close(); // Fechar o arquivo
+    } catch (NumberFormatException e) {
+        e.printStackTrace();
+    }
+    */
