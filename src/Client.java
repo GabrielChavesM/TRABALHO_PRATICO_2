@@ -119,7 +119,7 @@ public class Client {
         }
         
 
-    // TODO Parte III - Armazenar respostas das perguntas de V/F no arquivo "data.txt"
+    // TODO Parte III - Armazenar respostas das perguntas de V/F no arquivo "data_2.txt"
     try {
         BufferedWriter writerTrueOrFalse = new BufferedWriter(new FileWriter("data/data_2.txt")); // Append true para acrescentar ao arquivo existente
 
@@ -136,8 +136,6 @@ public class Client {
             int numOptions = 2;
 
             for (int j = 0; j < numOptions; j++) {
-                //String option = scanner.nextLine();
-                //writerTrueOrFalse.write(option + "\n");
                 String trueFalse = scanner.nextLine();
                 writerTrueOrFalse.write(trueFalse + "\n");
                 Double score = Double.parseDouble(scanner.nextLine());
@@ -146,25 +144,22 @@ public class Client {
         }
         writerTrueOrFalse.close(); // Fechar o arquivo
         
-
-        System.out.println("Digite o número de alunos: ");
         int nrStudentsTrueOrFalse = scanner.nextInt();
         scanner.nextLine(); // Consumir a quebra de linha pendente
 
         Map<String, Double> studentsScoresTrueOrFalse = new HashMap<>();
 
         for (int i = 0; i < nrStudentsTrueOrFalse; i++) {
-            System.out.println("Digite o nome do aluno: ");
             String studentName = scanner.next();
             double studentScore = 0.0;
 
             int nrQuestions = nrQuestTrueOrFalse;
 
             for (int j = 0; j < nrQuestions; j++) {
-                System.out.println("Digite o número da questão, a letra e a resposta (ex: P1 V/F): ");
                 String studentQuestNr = scanner.next();
                 String studentAnswer = scanner.next();
 
+                // TODO Parte IV - Atribuir notas aos alunos comparando com as respostas no data_2.txt
                 try {
                     BufferedReader reader = new BufferedReader(new FileReader("data/data_2.txt"));
                     String line;
@@ -199,10 +194,15 @@ public class Client {
             studentsScoresTrueOrFalse.put(studentName, studentScore);
         }
 
+        System.out.print("\033\143"); // Limpar a consola
+        // Imprime a nota de todos os alunos.
+        for (Map.Entry<String, Double> entry : studentScores.entrySet()) {
+            System.out.println("Nota de " + entry.getKey() + ": " + entry.getValue());
+        }
         // Exibir notas dos alunos para as questões V/F
-        System.out.println("Notas dos alunos:");
+        System.out.println("\nNotas dos alunos V/F:");
         for (Map.Entry<String, Double> entry : studentsScoresTrueOrFalse.entrySet()) {
-            System.out.println(entry.getKey() + " - Nota: " + entry.getValue());
+            System.out.println("Nota de " + entry.getKey() + ": " + entry.getValue());
         }
     } catch(NumberFormatException e) {
         e.printStackTrace();
