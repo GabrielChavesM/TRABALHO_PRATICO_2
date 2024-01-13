@@ -21,7 +21,7 @@ public class Client {
         Map<Integer, Double[]> pontuacaoQuestoes = new HashMap<>();
 
         // Criação de um arquivo para armazenar as respostas das perguntas.
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/data_1.txt"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/data.txt"))) {
             for (int i = 0; i < nrQuest; i++) {
                 String userInput = scanner.nextLine(); 
                 Scanner stringScanner = new Scanner(userInput);
@@ -72,7 +72,7 @@ public class Client {
             double studentScore = 0.0;
             // * Para avaliar os alunos, é lido o arquivo para comparar as respostas
             // * e aplicar a cotação correta.
-            BufferedReader reader = new BufferedReader(new FileReader("data/data_1.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("data/data.txt"));
 
             // São 4 alíneas para cada pergunta
             for (int j = 0; j < 4; j++) {
@@ -119,9 +119,9 @@ public class Client {
         }
         
 
-    // TODO Parte III - Armazenar respostas das perguntas de V/F no arquivo "data_2.txt"
+    // TODO Parte III - Armazenar respostas das perguntas de V/F no arquivo "data.txt"
     try {
-        BufferedWriter writerTrueOrFalse = new BufferedWriter(new FileWriter("data/data_2.txt")); // Append true para acrescentar ao arquivo existente
+        BufferedWriter writerTrueOrFalse = new BufferedWriter(new FileWriter("data/data.txt")); // Append true para acrescentar ao arquivo existente
 
         int nrQuestTrueOrFalse = scanner.nextInt();
         scanner.nextLine();
@@ -159,9 +159,9 @@ public class Client {
                 String studentQuestNr = scanner.next();
                 String studentAnswer = scanner.next();
 
-                // TODO Parte IV - Atribuir notas aos alunos comparando com as respostas no data_2.txt
+                // TODO Parte IV - Atribuir notas aos alunos comparando com as respostas no data.txt
                 try {
-                    BufferedReader reader = new BufferedReader(new FileReader("data/data_2.txt"));
+                    BufferedReader reader = new BufferedReader(new FileReader("data/data.txt"));
                     String line;
 
                     while ((line = reader.readLine()) != null) {
@@ -193,6 +193,37 @@ public class Client {
             }
             studentsScoresTrueOrFalse.put(studentName, studentScore);
         }
+
+
+    // TODO - Parte V - Armazenar as soluções no arquivo "data.txt"
+    try {
+        BufferedWriter writerMult = new BufferedWriter(new FileWriter("data/data_3.txt"));
+        int nrQuestMult = scanner.nextInt();
+        scanner.nextLine();
+
+        for(int i=0; i < nrQuestMult; i++) {
+            int QuestNr = scanner.nextInt();
+            writerMult.write("P" + QuestNr + "\n");
+            scanner.nextLine(); // Limpar o buffer
+
+            String question = scanner.nextLine().trim(); // Questão
+
+            for(int j=0; j < 5; j++) {
+                String questLetter = scanner.nextLine();
+                writerMult.write(questLetter + "\n");
+                Double score = Double.parseDouble(scanner.nextLine());
+                writerMult.write(score + "\n");
+            }
+        }
+
+
+        // TODO - Parte VI - Comparar as respostas dos alunos com as soluções e dar-lhes as notas
+
+
+        writerMult.close();
+    } catch(NumberFormatException e) {
+        e.printStackTrace();
+    }
 
         System.out.print("\033\143"); // Limpar a consola
         // Imprime a nota de todos os alunos.
