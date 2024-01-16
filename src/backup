@@ -215,15 +215,59 @@ public class Client {
                 writerMult.write(score + "\n");
             }
         }
-
+        writerMult.close();
 
         // TODO - Parte VI - Comparar as respostas dos alunos com as soluções e dar-lhes as notas
+        int nrStudentsMult = scanner.nextInt();
+        scanner.nextLine();
 
+        Map<String, Double> studentsScoresMult = new HashMap<>();
 
-        writerMult.close();
-    } catch(NumberFormatException e) {
-        e.printStackTrace();
-    }
+        for (int i = 0; i < nrStudentsMult; i++) {
+            String studentName = scanner.next();
+            double studentScore = 0.0;
+
+            int nrQuestions = nrQuestMult;
+
+            for (int j = 0; j < nrQuestions; j++) {
+                String studentQuestNr = scanner.next();
+                String studentAnswer = scanner.next();
+
+                // TODO Parte VI - Atribuir notas aos alunos comparando com as respostas no data.txt
+                try {
+                    BufferedReader reader = new BufferedReader(new FileReader("data/data.txt"));
+                    String line;
+
+                    while ((line = reader.readLine()) != null) {
+                        if (line.trim().equals(studentQuestNr)) {
+                            int startLine = (Integer.parseInt(studentQuestNr.substring(1)) - 1) * 8 + 2;
+                            int endLine = (Integer.parseInt(studentQuestNr.substring(1)) - 1) * 8 + 9;
+
+                            for (int n = startLine; n <= endLine; n++) {
+                                String currentLine = reader.readLine();
+
+                                if (currentLine == null) {
+                                    studentScore += 0;
+                                    break;
+                                }
+
+                                if (currentLine.trim().equals(studentAnswer)) {
+                                    double questScore = Double.parseDouble(reader.readLine().trim());
+                                    studentScore += questScore;
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+                    }
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            studentsScoresMult.put(studentName, studentScore);
+        }
+
 
         System.out.print("\033\143"); // Limpar a consola
         // Imprime a nota de todos os alunos.
@@ -235,6 +279,13 @@ public class Client {
         for (Map.Entry<String, Double> entry : studentsScoresTrueOrFalse.entrySet()) {
             System.out.println("Nota de " + entry.getKey() + ": " + entry.getValue());
         }
+        System.out.println("\nNotas dos alunos Escolha múltipla:");
+        for (Map.Entry<String, Double> entry : studentsScoresMult.entrySet()) {
+            System.out.println("Nota de " + entry.getKey() + ": " + entry.getKey());
+        }
+    } catch(NumberFormatException e) {
+        e.printStackTrace();
+    }
     } catch(NumberFormatException e) {
         e.printStackTrace();
     }
