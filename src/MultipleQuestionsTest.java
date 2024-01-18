@@ -1,5 +1,5 @@
+// MultipleQuestionsTest.java
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,43 +8,46 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-class MultipleQuestionsTest {
+public class MultipleQuestionsTest implements Test {
 
-    public Map<String, Double> processMultipleQuestionsTest(Scanner scanner) throws IOException {
+    private Map<String, Double> studentScores = new HashMap<>();
+
+    @Override
+    public void processTest(Scanner scanner) throws IOException {
         int nrQuestMult = scanner.nextInt();
         scanner.nextLine();
         Map<Integer, String[]> respostasMultCorretasMult = new HashMap<>();
         Map<Integer, Double[]> pontuacaoQuestoesMult = new HashMap<>();
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/data.txt"))) {
+        try (FileWriter writer = new FileWriter("data/data.txt")) {
             for (int i = 0; i < nrQuestMult; i++) {
                 String userInputMult = scanner.nextLine();
                 Scanner stringScannerMult = new Scanner(userInputMult);
-                int QuestNrMult = stringScannerMult.nextInt();
-                writer.write(QuestNrMult + " ");
-                String QuestTypeMult = stringScannerMult.next();
-                writer.write(QuestTypeMult + "\n");
+                int questNrMult = stringScannerMult.nextInt();
+                writer.write(questNrMult + " ");
+                String questTypeMult = stringScannerMult.next();
+                writer.write(questTypeMult + "\n");
                 stringScannerMult.next();
                 stringScannerMult.close();
 
-                if (QuestTypeMult.equals("F")) {
+                if (questTypeMult.equals("F")) {
                     int nrOpcoesMult = 5;
                     String[] respostasMult = new String[nrOpcoesMult];
-                    Double[] QuestScoreMult = new Double[nrOpcoesMult];
+                    Double[] questScoreMult = new Double[nrOpcoesMult];
 
                     for (int j = 0; j < nrOpcoesMult; j++) {
                         String optionInputMult = scanner.nextLine();
                         String[] partsMult = optionInputMult.split("\\s+");
 
                         respostasMult[j] = partsMult[0];
-                        QuestScoreMult[j] = Double.parseDouble(partsMult[2]);
+                        questScoreMult[j] = Double.parseDouble(partsMult[2]);
 
                         writer.write(respostasMult[j] + "\n");
-                        writer.write(QuestScoreMult[j] + "\n");
+                        writer.write(questScoreMult[j] + "\n");
                     }
 
-                    respostasMultCorretasMult.put(QuestNrMult, respostasMult);
-                    pontuacaoQuestoesMult.put(QuestNrMult, QuestScoreMult);
+                    respostasMultCorretasMult.put(questNrMult, respostasMult);
+                    pontuacaoQuestoesMult.put(questNrMult, questScoreMult);
                 }
             }
         } catch (NumberFormatException e) {
@@ -76,8 +79,8 @@ class MultipleQuestionsTest {
                     }
 
                     if (currentLine.trim().equals(studentQuestLetterMult)) {
-                        double QuestScoreMult = Double.parseDouble(readerMult.readLine());
-                        studentScoreMult += QuestScoreMult;
+                        double questScoreMult = Double.parseDouble(readerMult.readLine().trim());
+                        studentScoreMult += questScoreMult;
                         break;
                     }
                 }
@@ -86,7 +89,12 @@ class MultipleQuestionsTest {
             readerMult.close();
         }
 
-        // Output student scores
-        return Collections.unmodifiableMap(studentScoreMults);
+        // Set the studentScores field
+        studentScores = studentScoreMults;
+    }
+
+    @Override
+    public Map<String, Double> getStudentScores() {
+        return Collections.unmodifiableMap(studentScores);
     }
 }

@@ -1,3 +1,4 @@
+// TrueOrFalseTest.java
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -8,25 +9,24 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-class TrueOrFalseTest {
+public class TrueOrFalseTest implements Test {
     private Map<String, Double> studentScores = new HashMap<>();
 
-    public void processTrueOrFalseTest(Scanner scanner) throws IOException {
+    @Override
+    public void processTest(Scanner scanner) throws IOException {
         try {
             BufferedWriter writerTrueOrFalse = new BufferedWriter(new FileWriter("data/data.txt"));
-            int nrQuestTrueOrFalse = scanner.nextInt(); // Número de perguntas V/F
-            scanner.nextLine(); // Consume newline
+            int nrQuestTrueOrFalse = scanner.nextInt();
+            scanner.nextLine();
 
-            // Ciclo igual para todas as perguntas
             for (int i = 0; i < nrQuestTrueOrFalse; i++) {
-                int QuestNr = scanner.nextInt();
-                writerTrueOrFalse.write("P" + QuestNr + "\n");
-                scanner.nextLine(); // Consume newline
-                String question = scanner.nextLine(); // Read question
+                int questNr = scanner.nextInt();
+                writerTrueOrFalse.write("P" + questNr + "\n");
+                scanner.nextLine();
+                String question = scanner.nextLine();
                 writerTrueOrFalse.write(question + "\n");
 
                 int numOptions = 2;
-                // Armazenar valores das opções
                 for (int j = 0; j < numOptions; j++) {
                     String trueFalse = scanner.nextLine();
                     writerTrueOrFalse.write(trueFalse + "\n");
@@ -34,14 +34,11 @@ class TrueOrFalseTest {
                     writerTrueOrFalse.write(score + "\n");
                 }
             }
-            writerTrueOrFalse.close(); // Fechar o arquivo
-
-            // TODO Parte IV - Atribuir notas aos alunos comparando com as respostas no data.txt
+            writerTrueOrFalse.close();
 
             int nrStudentsTrueOrFalse = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline pending
+            scanner.nextLine();
 
-            // Ciclo igual para todos os estudantes
             for (int i = 0; i < nrStudentsTrueOrFalse; i++) {
                 String studentName = scanner.next();
                 double studentScore = 0.0;
@@ -55,9 +52,6 @@ class TrueOrFalseTest {
                     try (BufferedReader reader = new BufferedReader(new FileReader("data/data.txt"))) {
                         String line;
 
-                        // * Mesma lógica para o armazenamento, as opções marcadas
-                        // * pelos alunos são comparadas ás opções armazenadas e é
-                        // * atribuída á pontuação do aluno o valor de cada pergunta
                         while ((line = reader.readLine()) != null) {
                             if (line.trim().equals(studentQuestNr)) {
                                 int startLine = (Integer.parseInt(studentQuestNr.substring(1)) - 1) * 8 + 2;
@@ -91,6 +85,7 @@ class TrueOrFalseTest {
         }
     }
 
+    @Override
     public Map<String, Double> getStudentScores() {
         return Collections.unmodifiableMap(studentScores);
     }
