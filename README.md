@@ -1,4 +1,18 @@
-Lógica do Programa:
-São enviados os dados pelo utilizdor sobre o número de perguntas, se são abertas ou fechadas e, se forem fechadas, as 4 respostas possíveis e as suas cotações, ou no caso de forem abertas, apenas é dada a cotação. As respostas ás perguntas são armazenadas no ficheiro "data.txt" para depois serem comparadas ás respostas dos alunos, sendo possível assim calcular a sua cotação.
-Após o utilizador fornecer os dados acerca do teste, fornece os dados acerca das respostas dos alunos.
-Tem de fornecer o número de alunos, os seus respectivos nomes e as suas respostas ás perguntas, essas respostas são comparadas, pergunta a pergunta, com as respostas corretas do teste, a cotação para a escolha da resposta é aplicada e soma-se a pontuação á nota do aluno, é repetido este processo para o número de alunos que haja a fazer a prova. No final realiza-se a soma das pontuações e imprime-se no ecrã o nome do aluno e a sua nota final.
+## Getting Started
+
+Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+
+## Folder Structure
+
+The workspace contains two folders by default, where:
+
+- `src`: the folder to maintain sources
+- `lib`: the folder to maintain dependencies
+
+Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+
+> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+
+## Dependency Management
+
+The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
