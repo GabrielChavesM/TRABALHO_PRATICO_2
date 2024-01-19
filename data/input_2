@@ -1,0 +1,108 @@
+4
+1 F ”Quanto é 10+10?”
+A 10 1
+B 20 -0.25
+C 30 -0.25
+D 40 -0.25
+2 F ”Quanto vale 10-5?”
+A 1 -0.25
+B 5 1
+C 10 -0.25
+D 15 -0.25
+3 F ”Quanto vale 5-10?”
+A 1 -0.25
+B -5 -0.25
+C 10 1
+D 15 -0.25
+4 A ”Prove que 15*3 = 15+15+15”
+2
+5
+Andre
+1 A
+2 B
+3 C
+4 2
+Bernardo 
+1 B 
+2 C 
+3 D 
+4 1 
+Caio 
+1 C
+2 D 
+3 -
+4 - 
+Daniela 
+1 D
+2 - 
+3 A 
+4 2 
+Estefania 
+1 A
+2 A 
+3 B 
+4 1
+2
+1
+“1+1 é 2?”
+V
+2
+F
+-2
+2
+“2+2 é 5?”
+V
+-2
+F
+2
+2
+Jonas
+P1 F
+P2 F
+Alice
+P1 V
+P2 V
+5
+1 F ”Quais números são primos?”
+A 1 1
+B 2 1
+C 3 1
+D 4 -0.5
+E 5 1
+2 F ”Quanto vale 10-5?”
+A 1 -0.5
+B 5 -0.5
+C 10 1
+D 15 -0.5
+E 20 -0.5
+3 F ”Quanto vale 5-10?”
+A 1 -0.5
+B -5 -0.5
+C 10 -0.5
+D 15 1
+E 20 -0.5
+4 F ”Prove que 15*3 = 15+15+15”
+A 1 -0.5
+B -5 -0.5
+C 10 -0.5
+D 15 -0.5
+E 20 1
+5 F ”Prove que 15*3 = 15+15+15”
+A 1 -0.5
+B -5 1
+C 10 -0.5
+D 15 -0.5
+E 20 -0.5
+2
+Alvaro
+1 B
+2 A
+3 D
+4 B
+5 C
+Bela 
+1 A
+2 A
+3 A 
+4 A
+5 A

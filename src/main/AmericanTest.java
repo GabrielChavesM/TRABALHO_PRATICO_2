@@ -1,4 +1,4 @@
-// AmericanTest.java
+package main;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -8,9 +8,34 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class AmericanTest implements Test {
-    private Map<String, Double> studentScores = new HashMap<>();
+/**
+ * A classe AmericanTest implementa a interface Test e fornece métodos para
+ * processar e avaliar um teste no estilo americano. O teste inclui questões
+ * de múltipla escolha e abertas.
+ *
+ * A classe oferece suporte à leitura e gravação de dados de teste em um arquivo
+ * e ao cálculo das pontuações para os alunos com base em suas respostas.
+ */
 
+public class AmericanTest implements Test {
+
+    /**
+     * Mapa para armazenar as pontuações de cada aluno.
+     */
+    private Map<String, Double> studentScores = new HashMap<>();
+    
+    /**
+     * Processa o teste americano com base no Scanner fornecido.
+     * Lê as perguntas, opções e respostas dos alunos, calcula as pontuações
+     * e armazena os resultados em um arquivo.
+     *
+     * @param scanner O objeto Scanner usado para entrada.
+     * @throws IOException Se ocorrer um erro de E/S.
+     * @param nrQuest Quantidade de perguntas.
+     * @param questType Tipo de pergunta.
+     * @param respostaCorreta Resposta correta, HM para armazenar respostas corretas.
+     * @param pontuacaoQuestoes Pontuação de cada questão, HM para armazenar pontuação.
+     */
     @Override
     public void processTest(Scanner scanner) throws IOException {
         String questionLine = scanner.nextLine();
@@ -63,6 +88,17 @@ public class AmericanTest implements Test {
         readAmericanTest(scanner);
     }
 
+    /**
+     * Lê os dados processados do teste americano a partir do arquivo e calcula
+     * as pontuações individuais dos alunos.
+     *
+     * @param scanner O objeto Scanner usado para entrada.
+     * @throws IOException Se ocorrer um erro de E/S.
+     * @param nrStudents Quantidade de alunos.
+     * @param studentQuestLetter Opção escolhida pelo aluno.
+     * @param studentScore Pontuação de cada aluno.
+     * @param StudentScores O mapa para armazenar as pontuações de cada aluno.
+     */
     public void readAmericanTest(Scanner scanner) throws IOException {
         try {
             int nrStudents = scanner.nextInt();
@@ -117,6 +153,11 @@ public class AmericanTest implements Test {
         }
     }
 
+    /**
+     * Recupera um mapa não modificável contendo as pontuações de cada aluno.
+     *
+     * @return Um mapa não modificável de nomes de alunos e suas respectivas pontuações.
+     */
     @Override
     public Map<String, Double> getStudentScores() {
         return Collections.unmodifiableMap(studentScores);

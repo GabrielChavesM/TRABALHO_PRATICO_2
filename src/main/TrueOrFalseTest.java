@@ -1,4 +1,4 @@
-// TrueOrFalseTest.java
+package main;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -9,9 +9,38 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * A classe TrueOrFalseTest implementa a interface Test e fornece métodos
+ * para processar e avaliar um teste de Verdadeiro ou Falso.
+ *
+ * A classe oferece suporte à leitura e gravação de dados de teste em um arquivo
+ * e ao cálculo das pontuações para os alunos com base em suas respostas.
+ */
+
 public class TrueOrFalseTest implements Test {
+
+    /**
+     * Mapa para armazenar as pontuações de cada aluno.
+     */
     private Map<String, Double> studentScores = new HashMap<>();
 
+    /**
+     * Processa o teste de Verdadeiro ou Falso com base no Scanner fornecido.
+     * Lê as perguntas, opções e respostas dos alunos, calcula as pontuações
+     * e armazena os resultados em um arquivo.
+     *
+     * @param scanner O objeto Scanner usado para entrada.
+     * @throws IOException Se ocorrer um erro de E/S durante o processamento do teste.
+     * @param nrQuestTrueOrFalse Quantidade de perguntas do teste de Verdadeiro ou Falso.
+     * @param question Pergunta do teste.
+     * @param trueFalse Opções Verdadeiro ou Falso.
+     * @param score Pontuação de cada opção.
+     * @param nrStudentsTrueOrFalse Quantidade de alunos.
+     * @param studentName Nome do aluno.
+     * @param studentScore Pontuação do aluno.
+     * @param studentQuestNr Número da questão respondida pelo aluno.
+     * @param studentAnswer Resposta do aluno.
+     */
     @Override
     public void processTest(Scanner scanner) throws IOException {
         try {
@@ -85,6 +114,11 @@ public class TrueOrFalseTest implements Test {
         }
     }
 
+    /**
+     * Recupera um mapa não modificável contendo as pontuações de cada aluno.
+     *
+     * @return Um mapa não modificável de nomes de alunos e suas respectivas pontuações.
+     */
     @Override
     public Map<String, Double> getStudentScores() {
         return Collections.unmodifiableMap(studentScores);

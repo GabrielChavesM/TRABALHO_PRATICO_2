@@ -1,4 +1,4 @@
-// MultipleQuestionsTest.java
+package main;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -8,10 +8,32 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * A classe MultipleQuestionsTest implementa a interface Test e fornece métodos
+ * para processar e avaliar um teste com múltiplas questões. O teste inclui
+ * perguntas de múltipla escolha.
+ *
+ * A classe oferece suporte à leitura e gravação de dados de teste em um arquivo
+ * e ao cálculo das pontuações para os alunos com base em suas respostas.
+ */
 public class MultipleQuestionsTest implements Test {
 
+    /**
+     * Mapa para armazenar as pontuações de cada aluno.
+     */
     private Map<String, Double> studentScores = new HashMap<>();
 
+    /**
+     * Processa o teste de múltiplas questões com base no Scanner fornecido.
+     * Lê as perguntas, opções e respostas dos alunos, calcula as pontuações
+     * e armazena os resultados em um arquivo.
+     *
+     * @param scanner O objeto Scanner usado para entrada.
+     * @throws IOException Se ocorrer um erro de E/S.
+     * @param nrQuestMult Quantidade de perguntas do teste de múltipla escolha.
+     * @param respostasMultCorretasMult Mapa para armazenar as respostas corretas das questões de múltipla escolha.
+     * @param pontuacaoQuestoesMult Mapa para armazenar as pontuações das questões de múltipla escolha.
+     */
     @Override
     public void processTest(Scanner scanner) throws IOException {
         int nrQuestMult = scanner.nextInt();
@@ -89,10 +111,14 @@ public class MultipleQuestionsTest implements Test {
             readerMult.close();
         }
 
-        // Set the studentScores field
         studentScores = studentScoreMults;
     }
 
+    /**
+     * Recupera um mapa não modificável contendo as pontuações de cada aluno.
+     *
+     * @return Um mapa não modificável de nomes de alunos e suas respectivas pontuações.
+     */
     @Override
     public Map<String, Double> getStudentScores() {
         return Collections.unmodifiableMap(studentScores);
